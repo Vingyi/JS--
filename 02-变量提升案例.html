@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //			//在浏览器中全局对象就是window
+        //			//在全局作用域中声明的便利和函数声明都会作为Window的属性存在
+        //			if(!("a" in window)){
+        //				var a = 1; //定义了一个a变量，起初a=undefined，因为js没有块级作用域
+        //			}
+        //			console.log(a); 
+        
+        //		//案例三
+        //		console.log(a);  // 1、 a=> function a(){}  因为：程序首先创建了一个全局EC，而函数的优先级最高
+        //		var a = 20;   //  3、对a重新赋值
+        //		console.log(a);  // 4、输出20
+        //		function a(){  //  2、创建global EC的VO时，函数的声明有限级要高于变量
+        //			
+        //		}
+        
+        //		//案例四
+        //		f();
+        //		console.log("b="+b);  //9
+        //		console.log("c="+c);  //9
+        //		console.log(a);      //出现一个异常错误，使用未定义的变量a
+        //		function f(){
+        //			var a = b = c = 9;  //var定义的a是局部变量，b/c是全局变量
+        //			//若要定义三个全局变量，var a=9,b=9,c=9
+        //			console.log(a); //9
+        //			console.log(b); //9
+        //			console.log(c); //9
+        //		}
+        
+                //案例五
+                f();
+                function f(){
+                    for(var k = 0;k < 10;k ++){
+                        console.log(k)  //0——9
+                    }
+                    console.log(k);   //10 
+                    //为什么可以在for循环外部访问k？
+                    //因为js没有块级作用域
+                }
+                </script>
+</body>
+</html>
