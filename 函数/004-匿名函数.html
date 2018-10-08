@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>匿名函数</title>
+</head>
+<body>
+    <script>
+        //用变量声明的函数叫匿名函数
+        //变量声明 （f是一个变量）
+        var f = function(a){
+        return a*a;
+        };
+        //因为我们用var声明的一个变量f，f的类型是function
+        console.log(typeof(f)); // => function
+        console.log(f(3));
+
+        //函数声明 （f2是一个函数）
+        function f2(a){
+            return a*a;
+        }
+        console.log(typeof(f2));
+        console.log(f2(4));
+
+        //区别：
+        //变量声明的函数（匿名函数）
+    </script>
+</body>
+</html>
