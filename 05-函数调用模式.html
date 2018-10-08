@@ -10,10 +10,20 @@
     <script>
         function f(a,b){
             console.log(a + " " + b);
-            console.log(this);
+            this.a=19; //此时this===window  相当于window.a=9;
+            console.log("a" in window); //=>true  
+            console.log(this);  //=>window (全局对象)  如果在严格模式下则返回undefined
         }
 
         f(2,3);  //直接调用函数  f():函数调用模式
+
+        //例子、练习
+        function Dog(){
+            this.age = 19;
+            console.log(this);
+        }
+        Dog(); //函数执行模式 =>window  “当成普通函数调用”
+        var d = new Dog();// 构造函数执行模式 =>Dog
     </script>
 </body>
 </html>
