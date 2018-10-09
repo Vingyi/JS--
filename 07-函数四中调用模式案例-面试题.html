@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+ //1、定义按钮类，要求按钮类的构造函数可以接受参数初始化按钮的宽度、高度、坐标xy
+       /*
+        function btn(width,height,x,y){
+            this.width = width; //给this对象上的width属性赋值，width参数的参数值
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            console.log("宽、高、x、y分别为："+width+"  "+height+"  "+x+"  "+y);
+        }
+        var b = new btn(100,200,30,40);
+        */
+
+ //2、借用Math的min方法实现求数组[2,9,33]中的最小值
+        /*
+        var m = Math.min.apply(null,[2,9,33]);
+        console.log(m);  // => 2
+        */
+
+ //3、把类数组转换成真正的数组 t=[1,true,"lao"];
+        var t = {}; //类数组，跟数组相似，但不是数组
+        t[0] = 1;
+        t[1] = true;
+        t[2] = "lao";
+        t.length = 3;
+        
+        /*
+        var m=[1,2,3];
+        m.slice();
+        //如果什么都不传，默认是从0索引开始截取到数组最后。
+        //第一个参数：截取开始的位置，startIndex
+        //第二个参数：截取结束的位置+1，endIndex 截取到这个位置之前的哪一个元素
+        */
+
+        //借用数组的slice方法，把this指向到t对象，
+        //那么slice方法就会返回t对象对应的数组
+        var k = Array.prototype.slice.call(t,0);
+        console.log(k);
+
+
+
+
+ //4、判断代码输出的内容：
+        function Dog(){
+            console.log(this);
+        }
+        Dog();  //函数调用模式
+        var d = new Dog();  //构造函数调用模式，this == d
+        Dog.call(null);  //借用调用模式
+    </script>
+</body>
+</html>
