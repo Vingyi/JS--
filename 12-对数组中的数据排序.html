@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var t = [90,8,34,2,39,87,22,10];
+        console.log("原数组："+t);
+        console.log("默认sort排序："+t.sort());
+        //sort方法是按照字符串进行比较大小规则计算排序的
+        //返回值：负数 —— a<b  0 —— a=b  正数 a>b
+        //利用函数式编程，sort方法可以接受一个比较大小的函数，例如数值比较大小的方法进行排序
+
+        //定义了一个变量，这个变量的类型是function
+        var f = function(a,b){
+            return a-b;
+        };
+        console.log("正确的排序为："+t.sort(f));
+        /*
+            进一步优化：
+            console.log(t.sort(function(a,b){
+                return a-b;
+                }));
+        */
+
+    </script>
+</body>
+</html>
