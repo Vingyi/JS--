@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归调用——命名函数表达式</title>
+</head>
+<body>
+    <script>
+        var f = function(){
+            console.log("aa");
+        };
+        f();
+
+        //函数命名表达式。:就是给函数一个名字
+        //fun相当于在函数内部添加变量fun，fun指向函数自身
+        //fun === arguments.callee
+        //fun的作用域：在函数内部，不会影响函数外面的声明的参数或者函数
+        var m = function fun(){
+            console.log("fun");
+            //fun();
+        };
+        m();
+    </script>
+</body>
+</html>
