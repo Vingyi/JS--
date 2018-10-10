@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数的递归调用</title>
+</head>
+<body>
+    <script>
+ //1、求1-100的和，用递归调用实现  
+    //    //用循环实现
+    //     var sum = 0;
+    //     for(var i = 0;i <= 100;i ++){
+    //         sum += i;
+    //     }
+    //     console.log(sum);
+
+        function sumNumber(num){
+            //递归 一定要有个结束自己调用自己的出口。
+            //函数只要执行到return，当前函数立即结束执行
+            if(num <= 1){
+                return num;
+            }
+            
+            //最终解析：
+            //当num==1时，不符合下面调用自己的条件，则返回1，结束函数的执行
+            //实现了递归函数的出口
+
+            //实现函数调用自己
+            return sumNumber(num -1) +num;
+        }
+
+        console.log(sumNumber(100));
+    </script>
+</body>
+</html>
