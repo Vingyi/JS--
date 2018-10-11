@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //垃圾回收处理
+        //数组的清零。
+        var a = [1,9,20,33,4,45];
+        a.forEach(function(item,index){
+            console.log(item);
+        });
+        //数组用完之后要使数组清零：让gc（垃圾回收机制）尽快回收a数组的内存空间
+        a = null;  //方法一，但不好：因为此方法会把a转成null的类型
+        a = []; //方法二，但不好：确实让a变成一个空数组，但是在堆上重新申请了一个空数组对象
+        a.length = 0; //方法三：最好的方式：可以让数组清空，也不改变数组的类型
+
+        //对象复用
+//例一：
+        var t = {};
+        for(var i = 0;i < 10;i ++){
+        //  var t = {};  //这样子会循环定义空对象，可以把定义放在循环外。
+            t.age = 19;
+            t.name = "lll";
+            t.index = i;
+            console.log(t);
+        }
+
+      t = null; //如果对象不用了，那就立即设置为null，等待垃圾回收
+        
+//例二
+        //在循环中最好也别使用函数表达式
+        for(var k = 0;k < 10; k ++){
+            var t = function(a){  //t创建了10次函数对象
+                console.log(a);
+            };
+            t(k);
+        }
+        //此代码优化如下：
+        //把函数定义移到外面
+        function t(a){
+            console.log(a);
+        }
+        for(var k = 0;k < 10; k ++){
+            t(k);
+        }
+        t = null;
+    </script>
+</body>
+</html>
