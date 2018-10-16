@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>这是一个常见的闭包的demo和案例</title>
+</head>
+<body>
+    <script>
+        //定义了一个外层的函数
+        function foo(x){
+            var tmp = 3; //定义了一个局部的变量tmp
+
+            return function(y){  //匿名函数  把一个函数作为返回值返回
+                console.log(x+y+(++tmp));  //作用域：y < tmp < bar 
+            };
+        }
+
+        //调用foo方法执行，并把返回的函数给了bar变量
+        var bar = foo(2); //此时bar指向了匿名函数。bar是一个闭包：函数+x tmp
+        bar(10);
+        bar(20);
+    </script>
+</body>
+</html>
+<!--  
+由于顶层global作用域里的bar指向了这个函数体，这个函数体引用了tmp和x，
+那么js执行引擎只要bar没有释放，那函数体foo()和x、tmp两个变量就不会被释放，会一直驻留在内存中
+这就是闭包 -->
+<!-- 全局作用域只有在浏览器关闭时才会被回收 -->
