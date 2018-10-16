@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        //从文档结构中获取所有的li标签
+        var lis = document.querySelectorAll("li"); //querySelectorAll返回的是伪数组
+        console.log(lis);
+        
+        //典型错误：循环注册事件的index的典型错误。
+        //绑定一个点击事件，把索引打印出来
+        for(var i = 0;i < lis.length;i ++){
+            lis[i].onclick = function(){  //事件的方法执行是：当事件触发的时候执行
+                //变量i是父函数里面的变量
+                console.log(i); //把当前的索引i的值打印出来
+                //打印的值是循环结束后的i
+            }; //  ==》 无论点击哪个li都是打印5 （出错）
+        }
+        //i=5
+
+        //改造：把循环注册事件做成 自执行函数来传递变量i
+        //把 i 当成参数传递
+        for(var i = 0;i < lis.length;i ++){
+            // lis[i].onclick = function(){  //事件的方法执行是：当事件触发的时候执行
+            //     //变量i是父函数里面的变量
+            //     console.log(i); //把当前的索引i的值打印出来
+            // };
+            (function(a){
+                lis[a].onclick = function(){
+                    console.log(a);
+                }
+            })(i);  //i作为参数(值拷贝)传到自执行函数内部 i-> a
+        }
+    </script>
+</body>
+</html>
