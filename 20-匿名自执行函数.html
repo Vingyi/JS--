@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var t = function(a){
+            console.log(a);
+        }
+        t(8);
+        //尽量少的定义全局变量，尽量少污染全局变量
+
+        //可以使用自执行函数：
+    //第一种方法：
+        ;(function(a){  //前面的“;”可不要，但要确保前面的代码有";"
+        //  var i = 8;
+            console.log(a);
+        })(8);  
+
+    // //第二种方法：
+    //     ;(function(a){
+    //         console.log(a);
+    //     }(8));
+    (function(){
+            //模拟块级作用域
+            //用这种方法去做一个作用域的隔离
+        })();
+    </script>
+</body>
+</html>
