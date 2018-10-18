@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //setTimeout()：经过n秒后执行回调函数
+    //bom的一个方法，接收两个参数：第一个是回调函数，第二个是经过的毫秒数
+        // setTimeout(function(){
+        //     //当1000毫秒后，执行当前的函数体
+        //     console.log("aaa");
+        // },1000);
+
+
+        // for(var i=0;i<10;i++){
+        //     setTimeout(function(){  //注册一秒后的代码执行很快
+        //         console.log("i"); //函数体是在一秒后才执行
+        //     },1000);
+        // }  // ==> 输出十次10：
+        // //因为函数体是在1秒后才执行 ，那时候循环早就结束了,此时i=10，所以输出的i=10
+
+
+
+        for(var i=0;i<10;i++){
+           (function(a){
+            setTimeout(function(){  //注册一秒后的代码执行很快
+                console.log("i"); //函数体是在一秒后才执行
+            },1000);
+           })(i);
+            
+        } 
+    </script>
+</body>
+</html>
