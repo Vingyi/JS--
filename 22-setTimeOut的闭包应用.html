@@ -28,7 +28,7 @@
         for(var i=0;i<10;i++){
            (function(a){
             setTimeout(function(){  //注册一秒后的代码执行很快
-                console.log("i"); //函数体是在一秒后才执行
+                console.log(a); //函数体是在一秒后才执行
             },1000);
            })(i);
             
