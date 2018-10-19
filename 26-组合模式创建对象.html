@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //组合模式：组合构造函数模式和原型模式
+        function Cat(age,name){  //构造函数——构造函数的首字母大写，就称为Cat类
+            this.age = age;   //每个对象都有自己私有的属性值的属性，放到构造函数中
+            this.name = name;
+        }
+
+        //一般类型（共享）的方法，都放在原型上，让所有对象都共享方法的内存。
+        Cat.prototype.run=function(){
+            console.log(this.name+" is running..");
+        }
+
+        var c1 =new Cat(19,"tom");
+        var c2 =new Cat(19,"jim");
+        c1.age = 20;  //此时只修改了c1.age=20，c2.age依然等于19
+
+    </script>
+</body>
+</html>
