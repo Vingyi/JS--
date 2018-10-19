@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Cat(){
+            var o = {};
+            o.age = 19;
+            o.name = "jim";
+            o.run = function(){
+                console.log(o.name+"is running..");
+            };
+            return o;
+            //如果是构造函数执行模式，如果返回的是一个引用类型，则把引用类型返回
+            //如果是简单类型，则返回this
+        }
+        
+        //稳妥构造函数模式：要实现使用new构造一个对象和不使用new构造一个对象 的效果一样
+        var c1 = new Cat(); //构造函数调用模式
+        var c2 = Cat();  //函数调用模式  //返回this（window）即全局模式
+
+    </script>
+</body>
+</html>
