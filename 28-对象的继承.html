@@ -13,6 +13,7 @@
         function Animal(age,name){
             this.age = age;
             this.name = name;
+            this.foods = ["苹果","雪梨","西瓜"];
         }
 
         //在Animal基类的原型熵添加run方法
@@ -20,7 +21,7 @@
             console.log(this.name + " is running..");
         }
 
-        function Cat(age,name){
+        function Cat(age,name){ //子类1
             this.age = age;
             this.name = name;
         }
@@ -30,13 +31,18 @@
         // Cat.prototype.constructop = Cat; //因为上面的代码把Cat的prototype指向了Animal，所以要指回去
        
         //此时Cat的原型是Animal，所以可以继承Animal的属性和方法
-        var c = new Cat(19,"sss"); //希望Cat类继承animal的属性和方法
+        var c = new Cat(19,"sss");  //子类2
+        //希望Cat类继承animal的属性和方法
         c.run();
+        c.foods.push("栗子"); //往 Animal基类的foods数组（引用类型）中添加了“栗子”
         
+        var c2 = new Animal(20,"ddd");
+        c.foods; //缺点3：此时输出的是 ["苹果","雪梨","西瓜"，"栗子"];
 
-        //问题：
+        //缺点：
         //1、子类的构造函数的参数，没法传递给父类的构造函数。
         //2、子类的原型的constructor会被改变，需要自己改回来。Cat.prototype.constructop = Cat
+        //3、如果父类里有引用类型的属性，那么所有的子类会共享这个引用类型
     </script>
 </body>
 </html>
