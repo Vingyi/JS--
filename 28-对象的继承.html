@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //Animal基类
+        function Animal(age,name){
+            this.age = age;
+            this.name = name;
+        }
+
+        //在Animal基类的原型熵添加run方法
+        Animal.prototype.run = function(){
+            console.log(this.name + " is running..");
+        }
+
+        function Cat(age,name){
+            this.age = age;
+            this.name = name;
+        }
+        //原型继承的方式：
+        //起初Cat.prototype.constructop = Cat
+        Cat.prototype = new Animal(); //此时：Cat.prototype.constructop = Animal
+        // Cat.prototype.constructop = Cat; //因为上面的代码把Cat的prototype指向了Animal，所以要指回去
+       
+        //此时Cat的原型是Animal，所以可以继承Animal的属性和方法
+        var c = new Cat(19,"sss"); //希望Cat类继承animal的属性和方法
+        c.run();
+        
+
+        //问题：
+        //1、子类的构造函数的参数，没法传递给父类的构造函数。
+        //2、子类的原型的constructor会被改变，需要自己改回来。Cat.prototype.constructop = Cat
+    </script>
+</body>
+</html>
