@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型式继承</title>
+</head>
+<body>
+    <script>
+        //用来替代组合继承模式
+        //o就是要借用的对象
+        function object(o){
+            function F(){}
+            F.prototype = o; //让空函数的原型指向o对象
+            return new F();  //创建一个F实例，f的内部原型指向o对象。
+        }//通过o/原型来构建新实例
+        var m = {"age":"19","name":"lll","friends":["aa","bb"]};
+        var m1 = object(m); //创建新实例m1，原型是m，拥有m的属性
+
+        console.log(m1.friends);
+        m1.age = 20; //可以修改属性值
+
+        //优点：
+        //不需要使用new构造函数就可以直接构造另外其他对象
+        //缺点：
+        //所有构造出来的实例会共享原型对象上的引用类型的属性
+    </script>
+</body>
+</html>
