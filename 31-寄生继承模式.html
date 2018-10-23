@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>寄生继承模式</title>
 </head>
+<!--
+    取消单行注释：按下ctrl不放，再按k + u
+    删除整行：ctrl + shift + k
+    复制当前行：shift + alt +up/down
+    移动行：alt+up/down
+    增加/减小缩进:  ctrl + [/] 
+    代码格式化：shift + alt +f
+-->
 <body>
     <script>
-        //原型式继承的方法。传过来一个对象，内部新构造一个对象，新对象的原型指向o对象
-        function object(o){
-            function F(){}
+        //原型式继承的方法的扩展。传过来一个对象，内部新构造一个对象，新对象的原型指向o对象
+        function object(o) {
+            function F() {}
             F.prototype = o;
             return new F(); //return一个新的F实例
         }
-
+//——————————————————————————————————————————————————————————————————————————————————//
+    //例一
         //寄生继承方式：其实就是传一个对象到一个方法内部（类似工厂方法），
         //方法内部根据传来的对象构造一个新对象，并对新对象进行扩展增强，
         //最后返回新对象
@@ -26,9 +36,25 @@
             }
             return o;
         }
-        var m = createPerson();
-        console.log(m.say());
-        
+        var m = {"age":"19","name":"lll","friends":["aa","bb"]};
+        var m1 = object(m); 
+        console.log(m1.say());
+//——————————————————————————————————————————————————————————————————————————————————//
+    //例二
+        function createAnother(original) {
+            var clone = object(original); //通过调用函数创建一个新对象
+            clone.sayHi = function () { //以某种方式来增强这个对象
+                console.log("hi");
+            };
+            return clone; //返回这个对象
+        }
+        var person = {
+            name: "Nicholas",
+            friends: ["Shelby", "Court", "Van"]
+        };
+        var a = createAnother(person);
+        a.sayHi(); //"hi"
     </script>
 </body>
+
 </html>
