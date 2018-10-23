@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>寄生组合继承模式</title>
+</head>
+<!--
+    取消单行注释：按下ctrl不放，再按k + u
+    删除整行：ctrl + shift + k
+    复制当前行：shift + alt +up/down
+    移动行：alt+up/down
+    增加/减小缩进:  ctrl + [/] 
+    代码格式化：shift + alt +f
+-->
+<body>
+    <script>
+//寄生组合继承模式：寄生继承模式 + 构造函数继承模式
+        //父类
+        function Animal(age,name){
+            this.age = age;
+            this.name = name;
+            this.foods=["苹果","雪梨"];
+        }
+        //父类原型上的方法：通过寄生继承的方式进行继承
+        Animal.prototype.run = function(){
+          console.log(this.name + " is running..");  
+        };
+        //子类继承父类
+        function Cat(age,name){
+            //使用借用构造函数继承模式，来构建对象的实例属性
+            Animal.call(this,age,name);
+        }
+//之前的做法：Cat.protptype = new Animal();   //原型链继承模式。多执行了一个父类构造函数。浪费内存     
+        
+            //寄生继承的方法
+        Cat.prototype = inheritFrom(Animal.prototype);
+        var c = new Cat(19,"tom");
+        c.run();
+        //为了不浪费内存，用寄生继承模式：
+        //第一步：写原型式继承的方法：
+        function object(o){
+            function F(){}
+            F.prototype = o;
+            return new F();
+        }
+        //第二步：写寄生继承的方法的主体：
+            //寄生继承模式
+        function inheritFrom(o){
+            var t = object(o); //创建对象
+            t.constructor = Cat; //增强对象。把Cat原型的构造函数指回Cat构造函数
+            return t; 
+        }
+
+    </script>
+</body>
+</html>
