@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>33-模块化演变</title>
+</head>
+
+<!--
+    取消单行注释：按下ctrl不放，再按k + u
+    删除整行：ctrl + shift + k
+    复制当前行：shift + alt +up/down
+    移动行：alt+up/down
+    增加/减小缩进:  ctrl + [/] 
+    代码格式化：shift + alt +f
+-->
+<body>
+    <script>
+    /*
+        // 问题：（全局）变量有冲突
+        function demo(){
+            var a=b=c=9;
+            //a享受了var关键字，b、c不享受（即b、c是全局变量）
+            //如果变量没有声明，直接拿来用，那么久相当于直接声明了全局变量
+        }
+        demo();
+        console.log(a); //==> undefined 因为a是局部变量
+
+        //变量冲突例子：
+        a.js:
+        var a = 1;
+
+        b.js:
+        var a = "sss";
+    两个js文件都定义了a，在同一项目里使用时会有变量冲突，a等于1还是等于sss？？
+    */
+    
+    //尝试解决：命名冲突的问题
+        //第一个尝试：命名空间的方法 （以电商为例子）
+            //a.js小马开发的
+            var shop = {}; //顶层命名空间
+            shop.User = {}; //电商的用户模块
+            shop.User.UserList = {}; //用户列表页面模块
+            shop.User.UserList.length = 19; //共有19个用户
+            var t = 1;
+            //b.js小李开发的
+            shop.User.UserDetail = {};
+            shop.User.UserDetail.length = 20;
+            console.log(shop.User.UserList.length,shop.User.UserDetail.length);
+            var t = "sss";
+
+            //进一步演变：给单个文件里面定义的局部变量都变成局部作用域里的变量。
+        //第二个尝试：
+            (function(){
+                window.shop = {};
+                window.shop.User = {};
+                // window.shop.UserDetail.length
+            })();
+
+            //自执行函数的方法（简便的例子）
+                //a.js
+            (function(){
+                var a = 1;
+            })();
+                //b.js
+            (function(){
+                var a = "sss";
+            })();
+            //两个js文件的a互相不影响，因为用自执行函数模拟了局部作用域，作用域之间相互隔离，不互相影响
+
+        //局部作用域和命名空间的用法减少了变量冲突的可能性。
+        //第三个尝试：
+            //组件化：把自己基类的很多工具封装成一个整体的框架
+            //btn \ form \ animate
+
+            //laoma.js（主js文件）
+            (function(w){
+
+                //判断laoma是否存在，不存在就初始化一下
+                if(!w.laoma){ //laoma为空时
+                    w.laoma = {};
+                }
+                w.laoma.Btn = {
+                    getVal:function(){
+                        console.log("val");
+                    },
+                    setVal:function(str){
+                        console.log("setal");
+                    }
+                };
+                // w.laomoa = laoma; //把老马对象传递给window全局变量
+
+            })(window || {}); //把window作为对象传进到自执行函数里面，那就不会与外面有联系，只会跟参数有联系
+            
+            //laoma.animate.js （封装动画方法的组件）
+            (function(w){
+                if(!w.laoma){ //laoma为空时
+                    w.laoma = {};
+                }
+                w.laoma.animate = {};
+            })(window || {});
+
+            //laoma.form.js 
+            (function(w){
+                if(!w.laoma){ //laoma为空时
+                    w.laoma = {};
+                }
+                w.laoma.form = {};
+            })(window || {});
+            // 代码组件化，模块放置的前后或调用的顺序前后都能达到效果，互不影响（因为做了判断处理）
+            // 可以把代码放到不同的文件里，大家相互添加引用，我们都可以把组件封装到laoma的命名空间去
+            // 这就形成了一个非常完善的组件结构，
+            // 没有形成第三方模块化的库之前，大家都这样用（利用自执行函数模拟局部作用域）
+    
+    </script>
+</body>
+</html>
