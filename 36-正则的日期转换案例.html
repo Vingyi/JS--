@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>36-正则的日期转换案例</title>
+</head>
+<body>
+    <script>
+        //将字符串“1392945632000，mss，Date(1392945632000)”,其中绿色部分的数字转成日期对象
+        var str = "1392945632000,mss,Date(1392945632000)";
+        var t = eval(str.replace(/.*(Date\(\d+\)).*/g,"new $1"));
+        //.*：无限匹配；匹配'Date'、'('、'无限个数字'、')'，将其分组
+        //eval():把字符串当成表达式一样去执行
+        console.log(t.toString());  
+        //==> Fri Feb 21 2014 09:20:32 GMT+0800 (中国标准时间)
+    </script>
+</body>
+</html>
