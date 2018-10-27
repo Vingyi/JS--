@@ -6,6 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>35-正则的exec方法</title>
 </head>
+<!--
+    取消单行注释：按下ctrl不放，再按k + u
+    删除整行：ctrl + shift + k
+    复制当前行：shift + alt +up/down
+    移动行：alt+up/down
+    增加/减小缩进:  ctrl + [/] 
+    代码格式化：shift + alt +f
+-->
 <body>
     <script>
         var str = "12,34,56";
@@ -27,7 +35,8 @@
         //如果有分组：
         var str2 = "12abc,34,dfdf,45das";
         var exp2 = /\d{2}(\w)(\w+)/g; //选择两个数字，选择一个字母数字或下划线，尽量多的选择……
-
+        console.log(exp2.exec(str2)); //==> ["12abc","a","bc"]
+                                      //==> ["56das","d","as"]
     </script>
 </body>
 </html>
